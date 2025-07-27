@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Rick & Morty Explorer Pro</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700&display=swap" rel="stylesheet">
+  <style>
+    body {
+      background: linear-gradient(120deg, #0f2027, #203a43, #2c5364);
+      font-family: 'Orbitron', sans-serif;
+      color: #f0f0f0;
+    }
+    .card {
+      border-radius: 1rem;
+      overflow: hidden;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    .card:hover {
+      transform: scale(1.05);
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+    }
+    .btn-fav {
+      background: rgba(255, 255, 255, 0.2);
+      border: 1px solid rgba(255, 255, 255, 0.4);
+      border-radius: 50%;
+      padding: 5px;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+    .btn-fav.active {
+      background: #06b6d4;
+    }
+    .loader {
+      border: 4px solid #f3f3f3;
+      border-top: 4px solid #06b6d4;
+      border-radius: 50%;
+      width: 40px;
+      height: 40px;
+      animation: spin 1s linear infinite;
+      margin: 2rem auto;
+    }
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+  </style>
+</head>
+<body>
+  <div class="container mx-auto p-6">
+    <!-- HEADER -->
+    <header class="text-center my-8">
+      <h1 class="text-5xl md:text-6xl font-extrabold text-cyan-300">RICK & MORTY PRO</h1>
+      <p class="mt-2 text-gray-200">Descubre el multiverso con estilo</p>
+      <button id="show-favorites" class="mt-4 px-4 py-2 bg-cyan-500 hover:bg-cyan-600 text-white rounded">Ver Favoritos</button>
+    </header>
+
+    <!-- FILTROS -->
+    <section class="flex flex-col md:flex-row gap-4 mb-8 p-4 bg-gray-800 bg-opacity-40 rounded-lg">
+      <input type="text" id="name-filter" placeholder="Buscar..." 
+        class="flex-grow p-3 rounded bg-gray-700 text-white focus:outline-none focus:ring-2 focus:ring-cyan-400" />
+      <select id="status-filter" class="p-3 rounded bg-gray-700 text-white">
+        <option value="">Estado</option>
+        <option value="alive">Alive</option>
+        <option value="dead">Dead</option>
+        <option value="unknown">Unknown</option>
+      </select>
+      <select id="gender-filter" class="p-3 rounded bg-gray-700 text-white">
+        <option value="">Género</option>
+        <option value="female">Female</option>
+        <option value="male">Male</option>
+        <option value="genderless">Genderless</option>
+        <option value="unknown">Unknown</option>
+      </select>
+    </section>
+
+    <!-- Loader -->
+    <div id="loading" class="loader" style="display:none;"></div>
+
+    <!-- Personajes -->
+    <main id="characters-container" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6"></main>
+
+    <!-- Paginación -->
+    <footer class="flex justify-center gap-4 mt-8">
+      <button id="prev-button" class="bg-gradient-to-r from-cyan-500 to-blue-500 px-4 py-2 rounded-full hover:scale-105 transition text-white">⬅ Anterior</button>
+      <button id="next-button" class="bg-gradient-to-r from-cyan-500 to-blue-500 px-4 py-2 rounded-full hover:scale-105 transition text-white">Siguiente ➡</button>
+    </footer>
+  </div>
+
+  <script src="src/app.js"></script>
+</body>
+</html>
